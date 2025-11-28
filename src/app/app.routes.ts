@@ -9,6 +9,7 @@ import { Signals } from './signals/signals';
 import { HttpExample } from './http-example/http-example';
 import { NgrxExample } from './ngrx-example/ngrx-example';
 import { CodeBlockDemo } from './code-block-demo/code-block-demo';
+import { BehaviorSubjectComponent } from './behavior-subject/behavior-subject';
 
 export const routes: Routes = [
   {
@@ -46,5 +47,9 @@ export const routes: Routes = [
   {
     path: 'code-block-demo',
     component: CodeBlockDemo,
+  },
+  {
+    path: 'behavior-subject',
+    component: BehaviorSubjectComponent,
   },
 ];
