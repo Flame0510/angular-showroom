@@ -1,0 +1,85 @@
+.nav {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  background: linear-gradient(
+    135deg,
+    rgba(102, 126, 234, 0.2),
+    rgba(118, 75, 162, 0.2),
+    rgba(240, 147, 251, 0.2)
+  );
+  backdrop-filter: blur(8px);
+  background-size: 400% 400%;
+  animation: gradientShift 5s ease-in-out infinite alternate;
+  padding: 16px;
+  color: #fff;
+
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
+    transition: 0.3s all;
+
+    app-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    // Effetto hover con animazione
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    // Link attivo con gradiente animato
+    &.active {
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.2),
+        rgba(240, 147, 251, 0.3),
+        rgba(118, 75, 162, 0.3)
+      );
+      background-size: 200% 200%;
+      animation: activeGradientShift 3s ease-in-out infinite alternate;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    &.hover,
+    &.active {
+      color: #fff;
+      backdrop-filter: blur(12px);
+    }
+  }
+}
+
+@keyframes gradientShift {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes activeGradientShift {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}

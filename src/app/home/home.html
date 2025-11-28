@@ -1,0 +1,56 @@
+<div class="home">
+  <div class="home__hero">
+    <h1 class="home__title">Angular Corso 34</h1>
+    <p class="home__subtitle">Progetto educativo con esempi pratici di Angular 18+</p>
+  </div>
+
+  <div class="home__features">
+    @for (card of featureCards; track card.routerLink) {
+    <app-feature-card
+      [routerLink]="card.routerLink"
+      [iconName]="card.iconName"
+      [title]="card.title"
+      [description]="card.description"
+      [features]="card.features"
+    />
+    }
+  </div>
+
+  <div class="home__tech">
+    <h2 class="home__tech-title">Tecnologie Utilizzate</h2>
+    <div class="home__tech-grid">
+      <a href="https://angular.dev" target="_blank" class="home__tech-item">
+        <app-icon name="angular" />
+        Angular 18+
+      </a>
+      <a href="https://angular.dev/guide/components" target="_blank" class="home__tech-item">
+        <app-icon name="component" />
+        Standalone Components
+      </a>
+      <a href="https://angular.dev/guide/signals" target="_blank" class="home__tech-item">
+        <app-icon name="signals" />
+        Signals API
+      </a>
+      <a
+        href="https://angular.dev/guide/forms/reactive-forms"
+        target="_blank"
+        class="home__tech-item"
+      >
+        <app-icon name="form" />
+        Reactive Forms
+      </a>
+      <a href="https://www.typescriptlang.org/docs/" target="_blank" class="home__tech-item">
+        <app-icon name="code" />
+        TypeScript
+      </a>
+      <a href="https://sass-lang.com/guide/" target="_blank" class="home__tech-item">
+        <app-icon name="palette" />
+        SCSS
+      </a>
+      <a href="http://getbem.com/introduction/" target="_blank" class="home__tech-item">
+        <app-icon name="blocks" />
+        BEM con SCSS ( &__ )
+      </a>
+    </div>
+  </div>
+</div>

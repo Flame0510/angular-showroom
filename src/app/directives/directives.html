@@ -1,0 +1,107 @@
+<app-page-header
+  title="Direttive Angular"
+  subtitle="Controlla la struttura e lo stile del DOM in modo dinamico"
+></app-page-header>
+
+<div class="directives-container">
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- 1. *ngIf - Mostra/Nascondi elementi                                 -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section class="section">
+    <h3 class="section__title">*ngIf - Condizionale</h3>
+
+    <!-- Esempio base -->
+    <!-- Angular: *ngIf="showMessage" -->
+    <!-- React: {showMessage && <p>Messaggio</p>} -->
+    <button class="section__button" (click)="toggleMessage()">Toggle Messaggio</button>
+    <p *ngIf="showMessage" class="message">✓ Messaggio visibile!</p>
+
+    <!-- *ngIf con else -->
+    <!-- Angular: *ngIf="condition; else elseBlock" -->
+    <!-- React: {isLoggedIn ? <p>Benvenuto</p> : <p>Login</p>} -->
+    <button class="section__button" (click)="toggleLogin()">Toggle Login</button>
+    <p *ngIf="isLoggedIn; else notLoggedIn" class="success">✓ Sei autenticato</p>
+    <ng-template #notLoggedIn>
+      <p class="warning">⚠ Devi fare login</p>
+    </ng-template>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- 2. *ngFor - Ripeti elementi                                         -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section class="section">
+    <h3 class="section__title">*ngFor - Lista</h3>
+
+    <!-- Angular: *ngFor="let item of items; index as i" -->
+    <!-- React: {items.map((item, i) => <div key={i}>{item}</div>)} -->
+    <ul class="section__list">
+      <li class="section__list-item" *ngFor="let item of items; index as i">{{ i + 1 }}. {{ item }}</li>
+    </ul>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- 3. [ngClass] - Classi CSS dinamiche                                 -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section class="section">
+    <h3 class="section__title">[ngClass] - Classi dinamiche</h3>
+
+    <!-- Angular: [class.active]="isActive" -->
+    <!-- React: className={isActive ? 'active' : ''} -->
+    <button class="section__button" (click)="toggleActive()">Toggle Active</button>
+    <div [class.active]="isActive" class="box">Box con classe dinamica</div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- 4. [ngStyle] - Stili dinamici                                       -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section class="section">
+    <h3 class="section__title">[ngStyle] - Stili dinamici</h3>
+
+    <!-- Angular: [style.color]="textColor" -->
+    <!-- React: style={{color: textColor}} -->
+    <div class="color-buttons">
+      <button class="section__button" (click)="changeColor('#e74c3c')">Rosso</button>
+      <button class="section__button" (click)="changeColor('#3498db')">Blu</button>
+      <button class="section__button" (click)="changeColor('#2ecc71')">Verde</button>
+    </div>
+    <p class="section__text" [style.color]="textColor" [style.font-size.px]="20">Testo con colore dinamico</p>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <!-- Riepilogo                                                           -->
+  <!-- ═══════════════════════════════════════════════════════════════════ -->
+  <section class="section summary">
+    <h3 class="section__title">Riepilogo Angular vs React</h3>
+    <table class="summary__table">
+      <thead>
+        <tr>
+          <th class="summary__header-cell">Angular</th>
+          <th class="summary__header-cell">React</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="summary__row">
+          <td class="summary__cell summary__cell--angular">*ngIf="show"</td>
+          <td class="summary__cell summary__cell--react">{{ '{' }}show && &lt;div /&gt;{{ '}' }}</td>
+        </tr>
+        <tr class="summary__row">
+          <td class="summary__cell summary__cell--angular">*ngIf="x; else y"</td>
+          <td class="summary__cell summary__cell--react">{{ '{' }}x ? &lt;A/&gt; : &lt;B/&gt;{{ '}' }}</td>
+        </tr>
+        <tr class="summary__row">
+          <td class="summary__cell summary__cell--angular">*ngFor="let i of items"</td>
+          <td class="summary__cell summary__cell--react">{{ '{' }}items.map(i => ...){{ '}' }}</td>
+        </tr>
+        <tr class="summary__row">
+          <td class="summary__cell summary__cell--angular">[class.active]="isActive"</td>
+          <td class="summary__cell summary__cell--react">className={{ '{' }}isActive ? 'active' : ''{{ '}' }}</td>
+        </tr>
+        <tr class="summary__row">
+          <td class="summary__cell summary__cell--angular">[style.color]="color"</td>
+          <td class="summary__cell summary__cell--react">style={{ '{' }}{{ '{' }}color: color{{ '}' }}{{ '}' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</div>

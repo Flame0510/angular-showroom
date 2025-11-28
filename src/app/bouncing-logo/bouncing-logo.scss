@@ -1,0 +1,197 @@
+// Logo Angular che rimbalza per la pagina stile DVD screensaver
+.floating-logo {
+  position: fixed;
+  z-index: 9999;
+  cursor: pointer; // Indica che è cliccabile
+  user-select: none;
+  will-change: top, left; // Ottimizzazione per animazioni smooth
+
+  // Effetto vetro glassmorphism
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  border-radius: 20px;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  // Animazione di apparizione/scomparsa con scale
+  animation: floatingLogoAppear 10s ease-in-out forwards;
+
+  &:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 40px rgba(102, 126, 234, 0.4);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  // Logo "shiny" - raro 5% con gradiente animato dorato
+  &--shiny {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 215, 0, 0.3),
+      rgba(255, 165, 0, 0.35),
+      rgba(255, 140, 0, 0.3),
+      rgba(255, 215, 0, 0.3)
+    );
+    background-size: 200% 200%;
+    animation: floatingLogoAppear 10s ease-in-out forwards,
+      shinyGradientShift 3s ease-in-out infinite;
+    box-shadow: 0 8px 32px 0 rgba(255, 215, 0, 0.3);
+  }
+
+  img {
+    width: 100%; // Larghezza fissa dal size
+    height: auto; // Altezza automatica per mantenere aspect ratio
+    object-fit: contain;
+    display: block;
+  }
+
+  // Contenuto topic (icona + titolo)
+  &__topic-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    height: 100%;
+    width: 100%;
+
+    app-icon {
+      width: 24px;
+      height: 24px;
+      color: white;
+    }
+  }
+
+  &__topic-title {
+    color: white;
+    font-weight: 700;
+    font-size: 14px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;
+  }
+
+  // Stile specifico per topic (meno padding per far stare meglio il contenuto)
+  &--topic {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@keyframes floatingLogoAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  10% {
+    opacity: 1;
+    transform: scale(1) rotate(360deg);
+  }
+  90% {
+    opacity: 1;
+    transform: scale(1) rotate(360deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0) rotate(720deg);
+  }
+}
+
+@keyframes shinyGradientShift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+// Fade scuro in basso per migliorare leggibilità controlli
+.logo-controls-backdrop {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 150px;
+  z-index: 9999;
+  pointer-events: none; // Non blocca interazioni con i loghi
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
+}
+
+// Controlli per i loghi (fissi in basso a destra)
+.logo-controls {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 10000;
+
+  display: flex;
+  gap: 12px;
+
+  &__button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    padding: 12px 20px;
+
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+
+    cursor: pointer;
+    user-select: none;
+
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(102, 126, 234, 0.3);
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    // Bottone spawn con gradiente verde
+    &--spawn {
+      background: linear-gradient(135deg, rgba(46, 204, 113, 0.5), rgba(39, 174, 96, 0.5));
+      border-color: rgba(46, 204, 113, 0.5);
+
+      &:hover {
+        background: linear-gradient(135deg, rgba(46, 204, 113, 0.6), rgba(39, 174, 96, 0.6));
+        box-shadow: 0 12px 32px rgba(46, 204, 113, 0.6);
+      }
+    }
+
+    // Stato attivo per toggle (spawn automatico abilitato)
+    &--active {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.5), rgba(118, 75, 162, 0.5));
+      border-color: rgba(102, 126, 234, 0.5);
+    }
+  }
+
+  app-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  &__text {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+}

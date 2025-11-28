@@ -1,0 +1,139 @@
+// Contenitore principale della lista utenti
+.user-list {
+  max-width: 1400px;
+  margin: 0 auto;
+
+  // Toolbar con search e pulsante ricarica
+  &__toolbar {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 32px;
+    align-items: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    box-shadow: 0 0 32px rgba(0, 0, 0, 0.1);
+  }
+
+  // Pulsante ricarica con icona
+  &__reload-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+
+    app-icon {
+      width: 18px;
+      height: 18px;
+      transition: transform 0.6s ease;
+
+      svg {
+        stroke: white;
+      }
+    }
+
+    &:hover {
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+      transform: translateY(-2px);
+
+      app-icon {
+        transform: rotate(180deg);
+      }
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
+  // Griglia delle card utente
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // Stato vuoto con icona
+  &__empty {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+
+    app-icon {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 16px;
+
+      svg {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+  }
+
+  &__empty-text {
+    font-size: 20px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+
+  &__empty-subtitle {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+// Search box con icona
+.search-box {
+  display: flex;
+
+  width: 100%;
+
+  position: relative;
+
+  &__icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 12px 16px 12px 48px;
+    border: none;
+    color: #fff;
+    background: none;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.3s ease;
+
+    &::placeholder {
+      color: #aaa;
+    }
+  }
+}

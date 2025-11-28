@@ -1,0 +1,146 @@
+<div class="demo-container">
+  <app-page-header
+    title="CodeBlock Component"
+    subtitle="Componente riutilizzabile per visualizzare codice con syntax highlighting e copia rapida"
+  />
+
+  <div class="content">
+    <!-- Introduction -->
+    <section class="section">
+      <h2>✨ Caratteristiche</h2>
+      <div class="features-grid">
+        <div class="feature">
+          <span class="feature-icon">🎨</span>
+          <h3>Syntax Highlighting</h3>
+          <p>Supporta TypeScript, JavaScript, HTML, CSS e JSON</p>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">📋</span>
+          <h3>Copia Rapida</h3>
+          <p>Pulsante per copiare il codice negli appunti</p>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">🔧</span>
+          <h3>Configurabile</h3>
+          <p>Scegli il linguaggio e passa il codice come stringa</p>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">♻️</span>
+          <h3>Riutilizzabile</h3>
+          <p>Componente standalone pronto all'uso</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Usage -->
+    <section class="section">
+      <h2>📖 Come Usarlo</h2>
+      <p class="description">
+        Importa il componente e passagli il codice come stringa con il linguaggio desiderato:
+      </p>
+      <app-code-block
+        language="html"
+        code='<app-code-block language="typescript" [code]="myCode" />'
+      />
+    </section>
+
+    <!-- TypeScript Example -->
+    <section class="section">
+      <h2>💙 TypeScript / JavaScript</h2>
+      <p class="description">
+        Evidenzia keywords, decorators, classi, funzioni, stringhe e commenti:
+      </p>
+      <app-code-block
+        language="typescript"
+        [code]="typescriptExample"
+      />
+    </section>
+
+    <!-- HTML Example -->
+    <section class="section">
+      <h2>🌐 HTML con Angular</h2>
+      <p class="description">
+        Supporta template Angular con &#64;if, &#64;for, property binding e event binding:
+      </p>
+      <app-code-block
+        language="html"
+        [code]="htmlExample"
+      />
+    </section>
+
+    <!-- CSS Example -->
+    <section class="section">
+      <h2>🎨 CSS / SCSS</h2>
+      <p class="description">
+        Evidenzia selettori, proprietà, valori e numeri:
+      </p>
+      <app-code-block
+        language="css"
+        [code]="cssExample"
+      />
+    </section>
+
+    <!-- JSON Example -->
+    <section class="section">
+      <h2>📦 JSON</h2>
+      <p class="description">
+        Perfetto per file di configurazione e dati strutturati:
+      </p>
+      <app-code-block
+        language="json"
+        [code]="jsonExample"
+      />
+    </section>
+
+    <!-- Complex Example -->
+    <section class="section">
+      <h2>🚀 Esempio Complesso</h2>
+      <p class="description">
+        Il componente gestisce anche codice complesso con RxJS e NgRx:
+      </p>
+      <app-code-block
+        language="typescript"
+        [code]="complexExample"
+      />
+    </section>
+
+    <!-- Color Legend -->
+    <section class="section">
+      <h2>🎨 Legenda Colori</h2>
+      <div class="color-legend">
+        <div class="legend-item">
+          <span class="color-box" style="background: #64748b;"></span>
+          <span>Commenti</span>
+        </div>
+        <div class="legend-item">
+          <span class="color-box" style="background: #c084fc;"></span>
+          <span>Keywords</span>
+        </div>
+        <div class="legend-item">
+          <span class="color-box" style="background: #a5f3fc;"></span>
+          <span>Stringhe</span>
+        </div>
+        <div class="legend-item">
+          <span class="color-box" style="background: #4ade80;"></span>
+          <span>Classi</span>
+        </div>
+        <div class="legend-item">
+          <span class="color-box" style="background: #fcd34d;"></span>
+          <span>Funzioni</span>
+        </div>
+        <div class="legend-item">
+          <span class="color-box" style="background: #fbbf24;"></span>
+          <span>Decorators</span>
+        </div>
+        <div class="legend-item">
+          <span class="color-box" style="background: #60a5fa;"></span>
+          <span>Tipi</span>
+        </div>
+        <div class="legend-item">
+          <span class="color-box" style="background: #fb923c;"></span>
+          <span>Numeri</span>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

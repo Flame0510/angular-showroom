@@ -1,0 +1,18 @@
+.page-header {
+  text-align: center;
+  margin: 40px 0;
+
+  user-select: none;
+
+  &__title {
+    font-size: 36px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+
+  &__subtitle {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.9);
+  }
+}

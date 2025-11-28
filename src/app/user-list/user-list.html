@@ -1,0 +1,41 @@
+<div class="user-list">
+  <app-page-header
+    title="Lista Utenti"
+    subtitle="Gestisci e cerca tra gli utenti registrati"
+  ></app-page-header>
+
+  <div class="user-list__toolbar">
+    <div class="search-box">
+      <app-icon name="search" class="search-box__icon" />
+
+      <input
+        type="text"
+        placeholder="Cerca per nome, cognome o email..."
+        [(ngModel)]="search"
+        class="search-box__input"
+      />
+    </div>
+
+    <button (click)="fetchUsers()" class="user-list__reload-btn">
+      <app-icon name="reload" />
+      Ricarica
+    </button>
+  </div>
+
+  <div class="user-list__grid">
+    <!--/* @if stampa gli utenti se users è pieno */-->
+    @if(users.length) {
+    <!-- @for itera su users, track ottimizza il rendering -->
+    @for (user of users; track user.id; let i = $index) {
+    <app-user-card [user]="user" (delete)="deleteUser($event)"></app-user-card>
+    } }
+    <!--/* se users è vuoto stampa il messaggio */-->
+    @else {
+    <div class="user-list__empty">
+      <app-icon name="user-add" />
+      <p class="user-list__empty-text">Nessun utente disponibile</p>
+      <p class="user-list__empty-subtitle">Prova a ricaricare o modifica i criteri di ricerca</p>
+    </div>
+    }
+  </div>
+</div>

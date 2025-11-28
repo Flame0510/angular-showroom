@@ -1,0 +1,213 @@
+// Container principale della pagina direttive
+.directives-container {
+  max-width: 900px;
+  margin: 0 auto;
+
+  // Titolo principale (se presente)
+  &__main-title {
+    color: #fff;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    font-size: 32px;
+    font-weight: 700;
+  }
+
+  // Card contenitore per ogni sezione di esempi
+  .section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 32px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+
+    // Ombra più marcata all'hover
+    &:hover {
+      box-shadow: 0 12px 40px rgba(102, 126, 234, 0.5);
+    }
+
+    // Titolo della sezione (h3)
+    &__title {
+      color: #667eea;
+      margin-bottom: 20px;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    // Pulsanti con gradient viola
+    &__button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-right: 10px;
+      margin-bottom: 15px;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s ease;
+
+      // Effetto lift all'hover
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 16px rgba(102, 126, 234, 0.4);
+      }
+
+      // Ritorna alla posizione normale al click
+      &:active {
+        transform: translateY(0);
+      }
+    }
+
+    // Lista per *ngFor
+    &__list {
+      list-style: none;
+      padding: 0;
+      margin-top: 15px;
+
+      // Item della lista con bordo sinistro viola
+      &-item {
+        background: rgba(102, 126, 234, 0.08);
+        padding: 14px 16px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        border-left: 4px solid #667eea;
+        color: #333;
+        font-weight: 500;
+        transition: all 0.2s ease;
+
+        // Slide a destra all'hover
+        &:hover {
+          background: rgba(102, 126, 234, 0.15);
+          transform: translateX(4px);
+        }
+      }
+    }
+
+    // Paragrafi generici
+    &__text {
+      margin: 15px 0;
+      color: #333;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+  }
+
+  // Messaggio informativo (blu)
+  .message {
+    margin-bottom: 24px;
+    color: #667eea;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 12px 16px;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+  }
+
+  // Messaggio di successo (verde)
+  .success {
+    color: #2ecc71;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 12px 16px;
+    background: rgba(46, 204, 113, 0.1);
+    border-radius: 8px;
+    border-left: 4px solid #2ecc71;
+  }
+
+  // Messaggio di warning (rosso)
+  .warning {
+    color: #e74c3c;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 12px 16px;
+    background: rgba(231, 76, 60, 0.1);
+    border-radius: 8px;
+    border-left: 4px solid #e74c3c;
+  }
+
+  // Box per demo [ngClass]
+  .box {
+    background: rgba(102, 126, 234, 0.08);
+    padding: 24px;
+    margin-top: 15px;
+    border-radius: 12px;
+    border: 2px solid rgba(102, 126, 234, 0.2);
+    transition: all 0.3s ease;
+    color: #333;
+    font-weight: 500;
+    font-size: 15px;
+
+    // Stato attivo con gradient e testo bianco
+    &.active {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-color: #667eea;
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+      transform: scale(1.02);
+    }
+  }
+
+  // Container per i pulsanti di selezione colore
+  .color-buttons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  // Tabella di riepilogo Angular vs React
+  .summary {
+    // Tabella con bordi arrotondati
+    &__table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    // Celle header e normali
+    &__header-cell,
+    &__cell {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+    }
+
+    // Header con gradient viola
+    &__header-cell {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      font-weight: bold;
+    }
+
+    // Riga con hover
+    &__row {
+      &:hover {
+        background: rgba(102, 126, 234, 0.05);
+      }
+    }
+
+    // Cella codice Angular (viola)
+    &__cell--angular {
+      color: #667eea;
+      font-family: monospace;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    // Cella codice React (rosa)
+    &__cell--react {
+      color: #f093fb;
+      font-family: monospace;
+      font-size: 13px;
+      font-weight: 600;
+    }
+  }
+}

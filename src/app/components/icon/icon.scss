@@ -1,0 +1,14 @@
+// Il componente Icon renderizza solo l'SVG senza wrapper
+// Le dimensioni sono controllate dal parent tramite width/height
+
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}

@@ -1,0 +1,50 @@
+import { Routes } from '@angular/router';
+import { UserList } from './user-list/user-list';
+import { DataBinding } from './data-binding/data-binding';
+import { Directives } from './directives/directives';
+import { Home } from './home/home';
+import { Forms } from './forms/forms';
+import { UserPage } from './user-page/user-page';
+import { Signals } from './signals/signals';
+import { HttpExample } from './http-example/http-example';
+import { NgrxExample } from './ngrx-example/ngrx-example';
+import { CodeBlockDemo } from './code-block-demo/code-block-demo';
+
+export const routes: Routes = [
+  {
+    path: '',
+    component: Home,
+  },
+  {
+    path: 'forms',
+    component: Forms,
+  },
+  {
+    path: 'data-binding',
+    component: DataBinding,
+  },
+  {
+    path: 'directives',
+    component: Directives,
+  },
+  {
+    path: 'signals',
+    component: Signals,
+  },
+  {
+    path: 'http',
+    component: HttpExample,
+  },
+  {
+    path: 'users',
+    component: UserPage,
+  },
+  {
+    path: 'ngrx',
+    component: NgrxExample,
+  },
+  {
+    path: 'code-block-demo',
+    component: CodeBlockDemo,
+  },
+];

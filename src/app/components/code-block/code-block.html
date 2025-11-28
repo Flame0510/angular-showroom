@@ -1,0 +1,21 @@
+<div class="code-block-container">
+  <div class="code-block-header">
+    <span class="code-block-language">{{ language }}</span>
+    <button
+      class="code-block-copy-btn"
+      (click)="copyCode()"
+      [class.copied]="copied()"
+    >
+      @if (copied()) {
+        <app-icon name="check-circle" />
+        <span>Copiato!</span>
+      } @else {
+        <app-icon name="copy" />
+        <span>Copia</span>
+      }
+    </button>
+  </div>
+  <div class="code-block-content">
+    <pre><code [innerHTML]="highlightedCode"></code></pre>
+  </div>
+</div>

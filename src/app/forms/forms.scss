@@ -1,0 +1,220 @@
+// Blocco principale del form
+.form {
+  // Container che centra il form nella pagina
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  // Card bianca con ombra che contiene il form
+  &__card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    padding: 40px;
+    max-width: 500px;
+    width: 100%;
+    animation: slideIn 0.5s ease-out;
+
+    @media (max-width: 600px) {
+      padding: 24px;
+    }
+  }
+
+  // Titolo principale del form
+  &__title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 8px;
+    text-align: center;
+
+    @media (max-width: 600px) {
+      font-size: 24px;
+    }
+  }
+
+  // Sottotitolo descrittivo
+  &__subtitle {
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  // Contenitore di ogni campo del form
+  &__group {
+    margin-bottom: 24px;
+  }
+
+  // Label con icona di validazione
+  &__label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+  }
+
+  // Input con validazione visiva
+  &__input {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    outline: none;
+    box-sizing: border-box;
+
+    // Bordo blu al focus
+    &:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+    // Input valido: verde
+    &.valid {
+      border-color: #4caf50;
+      background-color: #f1f8f4;
+    }
+
+    // Input invalido: rosso
+    &.invalid {
+      border-color: #f44336;
+      background-color: #fef5f5;
+    }
+
+    &::placeholder {
+      color: #aaa;
+    }
+  }
+
+  // Contenitore dei pulsanti
+  &__actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+    }
+  }
+}
+
+// Icona di validazione (check/cross)
+.validation-icon {
+  display: flex;
+  align-items: center;
+
+  app-icon {
+    width: 16px;
+    height: 16px;
+    transition: all 0.3s ease;
+
+    // Colore rosso per icona di errore
+    &[name="error"] svg {
+      stroke: #f44336;
+    }
+
+    // Colore verde per icona di successo
+    &[name="check"] svg {
+      stroke: #4caf50;
+    }
+  }
+}
+
+// Blocco degli errori di validazione
+.error {
+  // Contenitore dei messaggi di errore
+  &__messages {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  // Singolo messaggio di errore con icona
+  &__item {
+    color: #f44336;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    &::before {
+      content: "⚠️";
+      font-size: 10px;
+    }
+  }
+}
+
+// Stile base dei pulsanti
+.btn {
+  flex: 1;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+
+  // Effetto click
+  &:active {
+    transform: scale(0.98);
+  }
+
+  @media (max-width: 600px) {
+    width: 100%;
+  }
+
+  // Pulsante submit con gradient
+  &__submit {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+
+    &:hover:not(:disabled) {
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+      transform: translateY(-2px);
+    }
+
+    // Stato disabilitato se form non valido
+    &:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+  }
+
+  // Pulsante reset con outline
+  &__reset {
+    background: white;
+    color: #667eea;
+    border: 2px solid #667eea;
+
+    &:hover {
+      background: #667eea;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+    }
+  }
+}
+
+// Animazione di entrata della card
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

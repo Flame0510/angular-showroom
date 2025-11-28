@@ -1,0 +1,41 @@
+{
+  "tabWidth": 2,
+  "useTabs": false,
+  "trailingComma": "none",
+  "semi": true,
+  "bracketSpacing": true,
+  "arrowParens": "avoid",
+  "endOfLine": "auto",
+  "printWidth": 90,
+  "singleQuote": true,
+  "overrides": [
+    {
+      "files": ["**/*.html"],
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ],
+  "importOrder": [
+    "^react(.*)$",
+    "^next(.*)$",
+    "^@reduxjs/toolkit(.*)$",
+    "^@hookform/resolvers(.*)$",
+    "^axios(.*)$",
+    "^moment(.*)$",
+    "^lodash(.*)$",
+    "^@tiptap(.*)$",
+    "^antd(.*)$",
+    "<THIRD_PARTY_MODULES>",
+    "^@/components(.*)$",
+    "^@/utils(.*)$",
+    "^@/hooks(.*)$",
+    "^@/styles(.*)$",
+    "^@/config(.*)$",
+    "^[./]"
+  ],
+  "importOrderCaseInsensitive": true,
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "importOrderParserPlugins": ["typescript", "decorators-legacy"]
+}
