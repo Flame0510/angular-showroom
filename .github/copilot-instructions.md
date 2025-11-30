@@ -1,12 +1,24 @@
 # Copilot Instructions - Angular Showcase
 
 ## 🌍 Language Policy
-**ALL code, comments, documentation, and instructions MUST be in English.**
+
+### Code & Technical Content (English Only)
+**ALL code, comments, and technical documentation MUST be in English:**
 - Variable names, function names, class names: English only
 - Code comments: English only
-- Documentation: English only
+- Technical documentation (README, inline docs): English only
 - Commit messages: English only
 - Console logs and error messages: English only
+
+### User-Facing Content (Italian)
+**ALL user-facing text in templates MUST be in Italian:**
+- HTML template text content: Italian
+- Button labels, headings, descriptions: Italian
+- Error messages shown to users: Italian
+- Form labels and placeholders: Italian
+- Toast notifications and alerts: Italian
+
+**Rationale**: The application is currently targeted for Italian users. Internationalization (i18n) will be implemented in the future to support multiple languages.
 
 ## 🎯 Project Overview
 This is an Angular 18+ standalone project showcasing the main framework features through interactive examples and demos.

@@ -24,17 +24,75 @@
       <div class="flow-arrow">subscribe</div>
     </div>
   </div>
+
+  <div class="store-patterns">
+    <h3>📦 Scegli il Pattern da Esplorare</h3>
+    <p class="patterns-intro">
+      Clicca su uno dei pattern per vedere una guida completa step-by-step
+      con esempi dettagliati e spiegazioni per principianti.
+    </p>
+    <div class="patterns-comparison">
+      <div
+        class="pattern recommended clickable"
+        [class.selected]="selectedPattern() === 'centralized'"
+        (click)="selectPattern('centralized')">
+        <h4>✅ Store Centralizzato (Consigliato)</h4>
+        <p>
+          <strong>Pattern Redux:</strong> Store globale unico con stato combinato.
+          Questo è l'approccio consigliato per la maggior parte delle applicazioni
+          in quanto fornisce una migliore visibilità dello stato, debug più semplice
+          e un flusso di dati coerente.
+        </p>
+        <div class="pattern-pros">
+          <strong>Vantaggi:</strong>
+          <ul>
+            <li>Unica fonte di verità (single source of truth)</li>
+            <li>Debug più semplice con DevTools</li>
+            <li>Migliore composizione dello stato</li>
+            <li>Condivisione dati tra funzionalità</li>
+          </ul>
+        </div>
+        <div class="select-hint">
+          👆 Clicca per vedere la guida completa
+        </div>
+      </div>
+      <div
+        class="pattern alternative clickable"
+        [class.selected]="selectedPattern() === 'feature'"
+        (click)="selectPattern('feature')">
+        <h4>⚡ Feature Stores (Alternativa)</h4>
+        <p>
+          <strong>Pattern Modulare:</strong> Store separati per ogni funzionalità.
+          Utile per moduli lazy-loaded o funzionalità completamente indipendenti
+          che non hanno mai bisogno di condividere lo stato.
+        </p>
+        <div class="pattern-pros">
+          <strong>Casi d'uso:</strong>
+          <ul>
+            <li>Funzionalità lazy-loaded</li>
+            <li>Moduli completamente isolati</li>
+            <li>Architettura micro-frontend</li>
+            <li>Sistemi basati su plugin</li>
+          </ul>
+        </div>
+        <div class="select-hint">
+          👆 Clicca per vedere la guida completa
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="concepts-grid">
   <div class="concept-card">
     <div class="concept-header">
       <span class="concept-icon">🏪</span>
-      <h3>Store</h3>
+      <h3>Store (Centralizzato)</h3>
     </div>
     <p class="concept-description">
       Il contenitore centrale che mantiene l'intero stato dell'applicazione.
-      È l'unica fonte di verità (single source of truth).
+      È l'unica fonte di verità (single source of truth). In questo progetto,
+      usiamo uno store centralizzato con reducer combinati (pattern Redux).
     </p>
     <app-code-block [code]="storeCode" language="typescript" />
     <div class="key-points">
@@ -54,8 +112,8 @@
       <h3>Actions</h3>
     </div>
     <p class="concept-description">
-      Eventi che descrivono qualcosa che è successo nell'applicazione. Sono
-      gli unici modi per inviare dati allo store.
+      Eventi che descrivono qualcosa che è successo nell'applicazione.
+      Sono l'unico modo per inviare dati allo store.
     </p>
     <app-code-block [code]="actionsCode" language="typescript" />
     <div class="key-points">
@@ -76,8 +134,7 @@
     </div>
     <p class="concept-description">
       Funzioni pure che prendono lo stato corrente e un'action, e ritornano
-      un nuovo stato. Sono responsabili della gestione delle transizioni di
-      stato.
+      un nuovo stato. Sono responsabili della gestione delle transizioni di stato.
     </p>
     <app-code-block [code]="reducerCode" language="typescript" />
     <div class="key-points">
@@ -97,8 +154,8 @@
       <h3>Selectors</h3>
     </div>
     <p class="concept-description">
-      Funzioni pure per selezionare e derivare dati dallo store. Sono
-      memoizzati per performance ottimali.
+      Funzioni pure per selezionare e derivare dati dallo store.
+      Sono memoizzati per performance ottimali.
     </p>
     <app-code-block [code]="selectorsCode" language="typescript" />
     <div class="key-points">
@@ -119,13 +176,13 @@
     </div>
     <p class="concept-description">
       Gestiscono side effects come chiamate HTTP, routing, storage, ecc.
-      Ascoltano actions e possono emettere nuove actions.
+      Ascoltano le actions e possono emettere nuove actions.
     </p>
     <app-code-block [code]="effectsCode" language="typescript" />
     <div class="key-points">
       <h4>Casi d'uso:</h4>
       <ul>
-        <li>✓ API calls</li>
+        <li>✓ Chiamate API</li>
         <li>✓ WebSocket</li>
         <li>✓ LocalStorage</li>
         <li>✓ Routing</li>
@@ -136,18 +193,18 @@
   <div class="concept-card">
     <div class="concept-header">
       <span class="concept-icon">🧩</span>
-      <h3>Component Integration</h3>
+      <h3>Integrazione Componenti</h3>
     </div>
     <p class="concept-description">
-      Come integrare NgRx nei componenti Angular usando Store injection e
-      selectors.
+      Come integrare NgRx nei componenti Angular usando l'injection dello Store
+      e i selectors.
     </p>
     <app-code-block [code]="componentCode" language="typescript" />
     <div class="key-points">
       <h4>Pattern:</h4>
       <ul>
         <li>✓ Inject Store</li>
-        <li>✓ Use selectors</li>
+        <li>✓ Usa selectors</li>
         <li>✓ Dispatch actions</li>
         <li>✓ Async pipe</li>
       </ul>
@@ -155,8 +212,449 @@
   </div>
 </div>
 
+<!-- ═══ PATTERN GUIDE SECTION (Dynamic) ═══ -->
+@if (selectedPattern()) {
+  <div id="pattern-guide" class="pattern-guide-section">
+    @if (selectedPattern() === 'centralized') {
+      <!-- CENTRALIZED STORE GUIDE -->
+      <div class="guide-header">
+        <h2>🏗️ Guida Completa: Store Centralizzato (Redux Pattern)</h2>
+        <p class="guide-intro">
+          Lo <strong>Store Centralizzato</strong> è il cuore dell'applicazione NgRx seguendo il pattern Redux.
+          Tutti i dati dell'applicazione vivono in un unico albero di stato globale, accessibile da qualsiasi
+          componente. Questa guida ti accompagnerà passo-passo nella creazione di uno store centralizzato da zero.
+        </p>
+      </div>
+
+      <!-- STEP 1: State Interface -->
+      <div class="guide-step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3>📋 Definisci le Interfacce di Stato</h3>
+          <p class="step-explanation">
+            Il primo passo è creare le interfacce TypeScript che descrivono la forma dei dati.
+            Ogni <strong>feature</strong> (funzionalità) della tua app avrà la sua interfaccia di stato.
+          </p>
+          <div class="example-block">
+            <h4>Esempio: Counter State</h4>
+            <p>Creiamo uno stato per un semplice contatore con storico:</p>
+            <app-code-block [code]="storeCode" language="typescript" />
+            <div class="explanation-box">
+              <strong>💡 Cosa stiamo facendo?</strong>
+              <ul>
+                <li><code>CounterState</code>: definisce la struttura dei dati del counter</li>
+                <li><code>count</code>: il valore corrente del contatore</li>
+                <li><code>history</code>: array che tiene traccia di tutti i valori passati</li>
+                <li><code>initialState</code>: stato iniziale quando l'app parte</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: Global State Interface -->
+      <div class="guide-step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h3>🌍 Crea l'Interfaccia dello Stato Globale</h3>
+          <p class="step-explanation">
+            Ora combiniamo tutti gli stati delle feature in un'unica interfaccia globale.
+            Questo è il "contenitore principale" che contiene tutto lo stato dell'applicazione.
+          </p>
+          <div class="example-block">
+            <h4>File: store/app.state.ts</h4>
+            <app-code-block [code]="centralizedStateCode" language="typescript" />
+            <div class="explanation-box">
+              <strong>💡 Perché facciamo questo?</strong>
+              <ul>
+                <li>Ogni feature ha la sua "fetta" nello stato globale</li>
+                <li><code>counter</code>, <code>todo</code>, <code>actionsLog</code> sono chiavi dell'oggetto globale</li>
+                <li>TypeScript ci dà autocompletamento e type-safety</li>
+                <li>Lo state tree finale sarà: <code>&#123; counter: &#123;...&#125;, todo: &#123;...&#125;, actionsLog: &#123;...&#125; &#125;</code></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: Actions -->
+      <div class="guide-step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3>⚡ Definisci le Actions</h3>
+          <p class="step-explanation">
+            Le <strong>Actions</strong> sono eventi che descrivono "cosa è successo" nell'app.
+            Sono l'unico modo per inviare informazioni allo store. Pensa a loro come "comandi" o "notifiche".
+          </p>
+          <div class="example-block">
+            <h4>File: store/counter/counter.actions.ts</h4>
+            <app-code-block [code]="actionsCode" language="typescript" />
+            <div class="explanation-box">
+              <strong>💡 Anatomia di un'Action:</strong>
+              <ul>
+                <li><code>[Counter]</code>: prefisso che identifica la sorgente (buona pratica)</li>
+                <li><code>Increment</code>: nome descrittivo dell'azione</li>
+                <li><code>props</code>: dati opzionali da passare (es. <code>setValue</code> riceve un valore)</li>
+                <li>Le actions sono <strong>immutabili</strong> e <strong>serializzabili</strong></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4: Reducers -->
+      <div class="guide-step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h3>⚙️ Crea i Reducers</h3>
+          <p class="step-explanation">
+            I <strong>Reducers</strong> sono funzioni pure che prendono lo stato corrente e un'action,
+            e ritornano un nuovo stato. NON modificano mai lo stato esistente, ma ne creano una copia aggiornata.
+          </p>
+          <div class="example-block">
+            <h4>File: store/counter/counter.reducer.ts</h4>
+            <app-code-block [code]="reducerCode" language="typescript" />
+            <div class="explanation-box">
+              <strong>💡 Regole d'oro dei Reducers:</strong>
+              <ul>
+                <li><strong>Funzioni pure</strong>: stesso input = stesso output, sempre</li>
+                <li><strong>Immutabilità</strong>: usa spread operator <code>{{ '{' }}...state{{ '}' }}</code> per copiare</li>
+                <li><strong>No side effects</strong>: no API calls, no console.log, no modifiche esterne</li>
+                <li><code>on()</code>: associa un'action a una funzione che aggiorna lo stato</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 5: Combine Reducers -->
+      <div class="guide-step">
+        <div class="step-number">5</div>
+        <div class="step-content">
+          <h3>🔗 Combina i Reducers</h3>
+          <p class="step-explanation">
+            Ora uniamo tutti i reducers delle feature in un unico oggetto usando <code>ActionReducerMap</code>.
+            Questo crea la mappa completa di come ogni fetta di stato viene aggiornata.
+          </p>
+          <div class="example-block">
+            <h4>File: store/app.reducers.ts</h4>
+            <app-code-block [code]="combinedReducersCode" language="typescript" />
+            <div class="explanation-box">
+              <strong>💡 Come funziona?</strong>
+              <ul>
+                <li>Ogni chiave (<code>counter</code>, <code>todo</code>, ecc.) corrisponde a una feature</li>
+                <li>Ogni valore è il reducer che gestisce quella feature</li>
+                <li>NgRx chiamerà il reducer giusto quando arriva un'action</li>
+                <li>Questo è il "ponte" tra lo stato globale e i reducers individuali</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 6: Provide Store -->
+      <div class="guide-step">
+        <div class="step-number">6</div>
+        <div class="step-content">
+          <h3>🚀 Configura lo Store nell'App</h3>
+          <p class="step-explanation">
+            Ora dobbiamo "registrare" lo store nell'applicazione Angular usando <code>provideStore()</code>.
+            Questo rende lo store disponibile in tutta l'app tramite dependency injection.
+          </p>
+          <div class="example-block">
+            <h4>File: app.config.ts</h4>
+            <app-code-block [code]="provideStoreCode" language="typescript" />
+            <div class="explanation-box">
+              <strong>💡 Cosa fa questo codice?</strong>
+              <ul>
+                <li><code>provideStore(appReducers)</code>: inizializza lo store con i reducers combinati</li>
+                <li><code>provideStoreDevtools()</code>: attiva le DevTools per debug (solo in dev mode)</li>
+                <li><code>maxAge: 25</code>: tiene in memoria le ultime 25 actions per il debug</li>
+                <li>Da questo momento lo store è pronto e accessibile ovunque!</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 7: Selectors -->
+      <div class="guide-step">
+        <div class="step-number">7</div>
+        <div class="step-content">
+          <h3>🔍 Crea i Selectors</h3>
+          <p class="step-explanation">
+            I <strong>Selectors</strong> sono funzioni che "estraggono" dati specifici dallo store.
+            Sono <strong>memoizzati</strong>, cioè cachano i risultati per evitare calcoli inutili.
+          </p>
+          <div class="example-block">
+            <h4>File: store/counter/counter.selectors.ts</h4>
+            <app-code-block [code]="centralizedSelectorsCode" language="typescript" />
+            <div class="explanation-box">
+              <strong>💡 Perché usare i Selectors?</strong>
+              <ul>
+                <li><strong>Memoizzazione</strong>: calcola solo se lo stato cambia, altrimenti usa cache</li>
+                <li><strong>Riutilizzabilità</strong>: definisci una volta, usa ovunque</li>
+                <li><strong>Composizione</strong>: puoi creare selectors complessi da altri selectors</li>
+                <li><strong>Type-safety</strong>: TypeScript sa esattamente cosa ritornano</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 8: Component Usage -->
+      <div class="guide-step">
+        <div class="step-number">8</div>
+        <div class="step-content">
+          <h3>🧩 Usa lo Store nei Componenti</h3>
+          <p class="step-explanation">
+            Finalmente! Ora possiamo usare lo store nei componenti per leggere lo stato e inviare actions.
+          </p>
+          <div class="example-block">
+            <h4>File: counter.component.ts</h4>
+            <app-code-block [code]="componentCode" language="typescript" />
+            <div class="explanation-box">
+              <strong>💡 Il ciclo completo:</strong>
+              <ol>
+                <li>Component <strong>inietta</strong> lo Store nel constructor</li>
+                <li>Usa <code>store.select()</code> per <strong>leggere</strong> lo stato (con selector)</li>
+                <li>Usa <code>store.dispatch()</code> per <strong>inviare</strong> actions</li>
+                <li>Il reducer <strong>aggiorna</strong> lo stato</li>
+                <li>Il selector <strong>notifica</strong> il component del cambiamento</li>
+                <li>La UI si <strong>aggiorna</strong> automaticamente (grazie all'async pipe!)</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-summary">
+        <h3>🎉 Congratulazioni!</h3>
+        <p>
+          Hai appena creato uno <strong>Store Centralizzato</strong> completo con NgRx!
+          Ora hai un'unica fonte di verità per tutti i dati dell'applicazione, con un flusso
+          unidirezionale prevedibile e facilmente debuggabile.
+        </p>
+        <div class="next-steps">
+          <h4>📚 Prossimi passi:</h4>
+          <ul>
+            <li>Esplora le <strong>Effects</strong> per gestire chiamate API e side effects</li>
+            <li>Aggiungi più features seguendo lo stesso pattern</li>
+            <li>Usa <strong>Redux DevTools</strong> per vedere lo stato in tempo reale</li>
+            <li>Sperimenta con i demo Counter e Todo qui sotto!</li>
+          </ul>
+        </div>
+      </div>
+    }
+
+    @if (selectedPattern() === 'feature') {
+      <!-- FEATURE STORE GUIDE -->
+      <div class="guide-header">
+        <h2>⚡ Guida Completa: Feature Stores (Pattern Modulare)</h2>
+        <p class="guide-intro">
+          I <strong>Feature Stores</strong> sono store indipendenti registrati dinamicamente per ogni feature.
+          Ogni modulo gestisce il proprio stato isolato, ideale per applicazioni modulari, lazy-loading
+          o architetture micro-frontend. Questa guida ti mostrerà come crearli da zero.
+        </p>
+      </div>
+
+      <!-- STEP 1: Feature State -->
+      <div class="guide-step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3>📋 Definisci lo Stato della Feature</h3>
+          <p class="step-explanation">
+            Diversamente dallo store centralizzato, ogni feature definisce solo il <strong>proprio</strong> stato,
+            senza conoscere lo stato di altre features. Questo garantisce isolamento completo.
+          </p>
+          <div class="example-block">
+            <h4>File: features/counter/store/counter.state.ts</h4>
+            <app-code-block [code]="featureStateCode" language="typescript" />
+            <div class="explanation-box">
+              <strong>💡 Differenze chiave:</strong>
+              <ul>
+                <li>Nessuna interfaccia <code>AppState</code> globale</li>
+                <li>Ogni feature è <strong>auto-contenuta</strong></li>
+                <li>Lo stato esiste solo quando il modulo è caricato (lazy-loading)</li>
+                <li>Perfetto per features che non condividono mai dati</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 2: Actions & Reducers -->
+      <div class="guide-step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h3>⚙️ Crea Actions e Reducers (identico allo store centralizzato)</h3>
+          <p class="step-explanation">
+            Le actions e i reducers funzionano esattamente come nello store centralizzato.
+            La differenza sta in <strong>come</strong> vengono registrati nell'app.
+          </p>
+          <div class="example-block">
+            <h4>File: features/counter/store/counter.reducer.ts</h4>
+            <app-code-block [code]="featureReducerCode" language="typescript" />
+            <div class="explanation-box">
+              <strong>💡 Nota importante:</strong>
+              <p>
+                Il codice del reducer è identico al centralizzato. La "magia" avviene nella
+                registrazione, che vedremo nel prossimo step!
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 3: Root Store Setup -->
+      <div class="guide-step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3>🌍 Setup dello Store Root (Vuoto)</h3>
+          <p class="step-explanation">
+            Con i Feature Stores, lo store root parte <strong>vuoto</strong>. Ogni feature si registrerà
+            dinamicamente quando viene caricata. Questo permette di caricare solo lo stato necessario.
+          </p>
+          <div class="example-block">
+            <h4>File: app.config.ts</h4>
+            <app-code-block [code]="featureProvideCode" language="typescript" />
+            <div class="explanation-box">
+              <strong>💡 Perché uno store vuoto?</strong>
+              <ul>
+                <li><code>provideStore(&#123;&#125;)</code>: inizializza lo store senza stato iniziale</li>
+                <li>Le features aggiungeranno il loro stato quando necessario</li>
+                <li><strong>Bundle size più piccolo</strong> all'avvio</li>
+                <li>Perfetto per <strong>lazy-loading</strong>: carica solo ciò che serve</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4: Feature Registration -->
+      <div class="guide-step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h3>🔌 Registra la Feature Store (Lazy-Loading)</h3>
+          <p class="step-explanation">
+            Questo è il cuore del pattern Feature Store! Quando una route viene caricata,
+            registra dinamicamente il suo stato nello store usando <code>provideState()</code>.
+          </p>
+          <div class="example-block">
+            <h4>File: features/counter/counter.routes.ts</h4>
+            <app-code-block [code]="featureModuleCode" language="typescript" />
+            <div class="explanation-box">
+              <strong>💡 Come funziona?</strong>
+              <ul>
+                <li>Quando l'utente naviga alla route, Angular carica il modulo</li>
+                <li><code>provideState('counter', counterReducer)</code>: registra lo stato nello store</li>
+                <li>Lo stato 'counter' appare dinamicamente nello store globale</li>
+                <li>Quando l'utente lascia la route, lo stato può essere mantenuto o rimosso</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 5: Feature Selectors -->
+      <div class="guide-step">
+        <div class="step-number">5</div>
+        <div class="step-content">
+          <h3>🔍 Crea i Selectors con createFeatureSelector</h3>
+          <p class="step-explanation">
+            Per i Feature Stores, usiamo <code>createFeatureSelector</code> invece di selezionare manualmente
+            dallo stato globale. NgRx sa trovare automaticamente la feature corretta.
+          </p>
+          <div class="example-block">
+            <h4>File: features/counter/store/counter.selectors.ts</h4>
+            <app-code-block [code]="featureSelectorCode" language="typescript" />
+            <div class="explanation-box">
+              <strong>💡 Differenze con i selectors centralizzati:</strong>
+              <ul>
+                <li><code>createFeatureSelector('counter')</code>: seleziona automaticamente la feature</li>
+                <li>Non serve definire manualmente <code>(state: AppState) => state.counter</code></li>
+                <li>Più conciso e auto-documentante</li>
+                <li>Il resto funziona identicamente (memoizzazione, composizione)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 6: Component Usage -->
+      <div class="guide-step">
+        <div class="step-number">6</div>
+        <div class="step-content">
+          <h3>🧩 Usa lo Store nei Componenti (identico!)</h3>
+          <p class="step-explanation">
+            La parte bella? <strong>I componenti non sanno la differenza!</strong>
+            Il codice è identico sia per store centralizzato che feature store.
+          </p>
+          <div class="example-block">
+            <h4>File: features/counter/counter.component.ts</h4>
+            <app-code-block [code]="componentCode" language="typescript" />
+            <div class="explanation-box">
+              <strong>💡 Vantaggi di questa astrazione:</strong>
+              <ul>
+                <li>Stesso codice nei components per entrambi i pattern</li>
+                <li>Puoi <strong>migrare</strong> da feature stores a centralizzato (o viceversa) facilmente</li>
+                <li>I componenti sono disaccoppiati dall'architettura dello store</li>
+                <li>Testabilità identica per entrambi gli approcci</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-summary">
+        <h3>🎉 Ottimo lavoro!</h3>
+        <p>
+          Hai creato un <strong>Feature Store</strong> modulare! Ora la tua app può caricare
+          dinamicamente lo stato solo quando necessario, perfetto per grandi applicazioni
+          con molti moduli indipendenti.
+        </p>
+        <div class="comparison-box">
+          <h4>📊 Store Centralizzato vs Feature Stores</h4>
+          <div class="comparison-table">
+            <div class="comparison-row header">
+              <div>Aspetto</div>
+              <div>Centralizzato</div>
+              <div>Feature Stores</div>
+            </div>
+            <div class="comparison-row">
+              <div>Setup iniziale</div>
+              <div>Tutto definito in app.config</div>
+              <div>Root vuoto, features si registrano</div>
+            </div>
+            <div class="comparison-row">
+              <div>Bundle size</div>
+              <div>Tutto caricato subito</div>
+              <div>Solo ciò che serve (lazy)</div>
+            </div>
+            <div class="comparison-row">
+              <div>Condivisione stato</div>
+              <div>Facile tra features</div>
+              <div>Più complesso (serve mediazione)</div>
+            </div>
+            <div class="comparison-row">
+              <div>DevTools</div>
+              <div>Vista completa sempre</div>
+              <div>Vista dinamica (features appaiono/scompaiono)</div>
+            </div>
+            <div class="comparison-row">
+              <div>Ideale per</div>
+              <div>App coese e medie dimensioni</div>
+              <div>App molto grandi, micro-frontend, plugin</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+}
+
 <div class="setup-section">
-  <h2>🚀 Setup & Installation</h2>
+  <h2>🚀 Setup & Installazione</h2>
   <div class="setup-grid">
     <div class="setup-step">
       <h3>1. Installazione</h3>
@@ -182,37 +680,38 @@
     <div class="practice">
       <h4>📁 Struttura File</h4>
       <ul>
-        <li>Organizza per feature</li>
+        <li>Organizza per funzionalità</li>
         <li>Mantieni file piccoli</li>
-        <li>Usa naming conventions</li>
-        <li>Separa concerns</li>
+        <li>Usa convenzioni di naming</li>
+        <li>Separa le responsabilità</li>
+        <li>Setup store centralizzato</li>
       </ul>
     </div>
     <div class="practice">
       <h4>🔒 Immutabilità</h4>
       <ul>
         <li>Usa spread operator</li>
-        <li>Non mutare lo state</li>
+        <li>Non mutare lo stato</li>
         <li>Usa immer se necessario</li>
-        <li>Freeze state in dev</li>
+        <li>Congela lo stato in dev</li>
       </ul>
     </div>
     <div class="practice">
       <h4>🎯 Performance</h4>
       <ul>
         <li>Usa selectors memoizzati</li>
-        <li>Normalizza lo state</li>
+        <li>Normalizza lo stato</li>
         <li>OnPush change detection</li>
-        <li>Evita logica nei reducer</li>
+        <li>Evita logica nei reducers</li>
       </ul>
     </div>
     <div class="practice">
       <h4>🧪 Testing</h4>
       <ul>
         <li>Testa reducers isolati</li>
-        <li>Mock effects</li>
-        <li>Test selectors</li>
-        <li>Integration tests</li>
+        <li>Mock degli effects</li>
+        <li>Testa i selectors</li>
+        <li>Test di integrazione</li>
       </ul>
     </div>
   </div>
