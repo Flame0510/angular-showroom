@@ -81,7 +81,7 @@ export class NgrxTodoDemo {
       // Dispatch action with payload
       this.store.dispatch(TodoActions.addTodo({ text }));
       // Reset local state
-      this.newTodoText.set('';
+      this.newTodoText.set('');
     }
   }
 
